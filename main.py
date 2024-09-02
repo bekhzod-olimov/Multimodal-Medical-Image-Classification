@@ -1,17 +1,19 @@
-import os, time, torch, argparse, pandas as pd
+import os, sys, time, torch, argparse, pandas as pd
 import torch.optim as optim
-from train import train_epoch, valid_epoch
 from sklearn.model_selection import train_test_split
-from dataset import get_df, CustomDataset
-from transformations import get_transformations
-from model import CustomModel
-from utils import set_seed, plot_learning_curves, get_dls, makedirs
+from src.train import train_epoch, valid_epoch
+from src.dataset import get_df, CustomDataset
+from src.transformations import get_transformations
+from src.model import CustomModel
+from src.create_data import create_data
+from src.utils import set_seed, plot_learning_curves, get_dls, makedirs
+sys.path.append("./")
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_name', type=str, default = "with_fts")
     parser.add_argument('--model_name', type=str, default = "rexnet_150")
-    parser.add_argument('--data_dir', type=str, default='/mnt/data/dataset/bekhzod/im_class/skin_lesion')
+    parser.add_argument('--data_dir', type=str, default='datasets/skin_lesion')
     parser.add_argument('--image_size', type=int, default = 224)
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--num_workers', type=int, default=16)
@@ -91,6 +93,8 @@ if __name__ == '__main__':
     set_seed(seed = seed)
 
     loss_fn = torch.nn.CrossEntropyLoss()
+    
+    if not os.path.isdir(args.data_dir): create_data(save_dir = "datasets")
     
     train_df, test_df, meta_features, n_features, mel_idx = get_df(args.data_dir, args.use_meta)
 

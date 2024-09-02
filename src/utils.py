@@ -1,8 +1,9 @@
-import os, torch, random, numpy as np
+import os, sys, torch, random, numpy as np
 from torch.utils.data import random_split, DataLoader
 from torch.utils.data.sampler import RandomSampler
 from matplotlib import pyplot as plt
-from dataset import CustomDataset
+from src.dataset import CustomDataset
+sys.path.append("./src")
 
 def set_seed(seed):
     random.seed(seed)
