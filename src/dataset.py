@@ -92,6 +92,7 @@ def get_df(data_dir, use_meta):
 
     tr_df = pd.read_csv(os.path.join(data_dir, 'train.csv'))
     tr_df['filepath'] = tr_df['image_name'].apply(lambda x: os.path.join(data_dir, f'train', f'{x}.jpg'))
+    cls_names = tr_df['benign_malignant'].unique()
 
     # test data
     test_df = pd.read_csv(os.path.join(data_dir, 'test.csv'))
@@ -105,8 +106,9 @@ def get_df(data_dir, use_meta):
 
     # class mapping
     mel_idx = 1
-    return tr_df, test_df, meta_data, n_meta_data, mel_idx
+    
+    return tr_df, test_df, meta_data, n_meta_data, mel_idx, cls_names
 
-# df_train, df_test, meta_data, n_meta_data, mel_idx = get_df("/mnt/data/dataset/bekhzod/im_class/skin_lesion", True)
+# df_train, df_test, meta_data, n_meta_data, mel_idx, cls_names = get_df("/mnt/data/dataset/bekhzod/im_class/skin_lesion", True)
 
 

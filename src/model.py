@@ -37,12 +37,11 @@ class CustomModel(Module):
             
             in_chs += n_feature_dims[1]
         self.classifier = Linear(in_chs, n_cls)
-        self.model.classifier = Identity()
-
+        
     def forward(self, inp, inp_meta=None):
         
-        inp = self.avgpool(self.model.forward_features(inp)).squeeze(-1).squeeze(-1)
+        fts = self.avgpool(self.model.forward_features(inp)).squeeze(-1).squeeze(-1)
         
-        if self.n_features > 0: inp = torch.cat((inp, self.meta_data_feature_extractor(inp_meta)), dim=1)
-        
-        return self.classifier(inp)
+        if inp_meta != None: fts = torch.cat([fts, self.meta_data_feature_extractor(inp_meta)], dim = 1)
+            
+        return self.classifier(fts)

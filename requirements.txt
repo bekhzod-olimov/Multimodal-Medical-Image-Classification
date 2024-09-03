@@ -14,3 +14,4 @@ grad-cam==1.4.6
 streamlit_free_text_select
 warmup_scheduler
 albumentations==1.4.14
+streamlit

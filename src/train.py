@@ -1,7 +1,6 @@
 import torch, numpy as np
 from sklearn.metrics import roc_auc_score
 from tqdm import tqdm 
-from warmup_scheduler import GradualWarmupScheduler
 
 def get_trans(img, I):
     if I >= 4:
@@ -15,23 +14,6 @@ def get_trans(img, I):
     elif I % 4 == 3:
         return img.flip(2).flip(3)
 
-class GradualWarmupSchedulerV2(GradualWarmupScheduler):
-    def __init__(self, optimizer, multiplier, total_epoch, after_scheduler=None):
-        super(GradualWarmupSchedulerV2, self).__init__(optimizer, multiplier, total_epoch, after_scheduler)
-    def get_lr(self):
-        if self.last_epoch > self.total_epoch:
-            if self.after_scheduler:
-                if not self.finished:
-                    self.after_scheduler.base_lrs = [base_lr * self.multiplier for base_lr in self.base_lrs]
-                    self.finished = True
-                return self.after_scheduler.get_lr()
-            return [base_lr * self.multiplier for base_lr in self.base_lrs]
-        if self.multiplier == 1.0:
-            return [base_lr * (float(self.last_epoch) / self.total_epoch) for base_lr in self.base_lrs]
-        else:
-            return [base_lr * ((self.multiplier - 1.) * self.last_epoch / self.total_epoch + 1.) for base_lr in self.base_lrs]
-
-
 def train_epoch(model, loader, optimizer, use_feats, device, image_size, loss_fn):
     model.train()
     train_loss = []
@@ -43,10 +25,10 @@ def train_epoch(model, loader, optimizer, use_feats, device, image_size, loss_fn
         if use_feats:
             data, meta = data
             data, meta, target = data.to(device), meta.to(device), target.to(device)
-            logits = model(data, meta)
+            logits = model(data, inp_meta = meta)
         else:
             data, target = data.to(device), target.to(device)
-            logits = model(data)        
+            logits = model(data, inp_meta = None)        
         
         loss = loss_fn(logits, target)
         loss.backward()
