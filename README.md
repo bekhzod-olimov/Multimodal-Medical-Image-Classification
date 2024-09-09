@@ -1,4 +1,4 @@
-# Multimodal Medical Image Classification using Deep Learninmg
+# Multimodal Medical Image Classification using Deep Learning
 This repository contains a deep learning (DL)-based artificial intelligence (AI) multi-modal model to classify medical images not only using images but also extra features (meta-data). 
 
 # These are the steps to use this repository:
@@ -7,7 +7,7 @@ This repository contains a deep learning (DL)-based artificial intelligence (AI)
 
 `git clone https://github.com/bekhzod-olimov/Multimodal-Medical-Image-Classification.git`
 
-`cd Multimodal Medical Image Classification`
+`cd Multimodal-Medical-Image-Classification`
 
 2. Create conda environment and activate it using the following script:
    
