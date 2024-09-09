@@ -1,13 +1,13 @@
 # Multimodal Medical Image Classification using Deep Learninmg
-This repository contains a deep learning (DL)-based artificial intelligence (AI) complex system to convert Japanese comicbook (manga) pages into Korean Webtoon. The system uses various Computer Vision and multimodal tasks, such as:
+This repository contains a deep learning (DL)-based artificial intelligence (AI) multi-modal model to classify medical images not only using images but also extra features (meta-data). 
 
 # These are the steps to use this repository:
 
 1. Clone the repository:
 
-`git clone https://github.com/bekhzod-olimov/Multimodal.git`
+`git clone https://github.com/bekhzod-olimov/Multimodal-Medical-Image-Classification.git`
 
-`cd Manga2WebtoonDevelopment`
+`cd Multimodal Medical Image Classification`
 
 2. Create conda environment and activate it using the following script:
    
