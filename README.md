@@ -25,7 +25,9 @@ This repository contains a deep learning (DL)-based artificial intelligence (AI)
 
 4. Train the models:
 
-Train code is going to be available soon. All models in the system are trained using data that is collected and labelled by ourselves. Thus, the data is not publicly available yet. We trained all the models in the systems, such as Detectron2 and Attentioned Deep Paint. Regarding the EasyOCR model, it is used only for inference.
+The training data is automatically downloaded and saved to the datasets directory once the training script is run
+
+`python main.py`
 
 4. Run demo using the following script:
 
