@@ -43,6 +43,6 @@ Inference process arguments can be changed based on the following information:
 
 ![image](https://github.com/user-attachments/assets/2265ca08-90e2-48b0-a722-f0181a4685b2)
 
-4. Run demo using the following script:
+6. Run demo using the following script:
 
 `streamlit run demo.py`
